@@ -25,6 +25,43 @@ painel.add(layer);
 Observe que quando o painel chamar o método paint a invocação será:
 painel.paint -> layer.paint -> btn.paint
 
+### Decorator no Java
+
+No Java, há um uso bastante interessante do padrão Decorator, através dos InputStreams. Isso permite manter a criação 
+de novos streams simples, enquanto a API fornece recursos avançados como buffers, acesso a dados primitivos, 
+criptografia ou compressão.
+
+O java define as interfaces [InputStream](https://docs.oracle.com/javase/8/docs/api/java/io/InputStream.html) e 
+[OutputStream](https://docs.oracle.com/javase/8/docs/api/java/io/OutputStream.html) que definem um conjunto básico de 
+métodos para qualquer stream "bruto", que lidam simplesmente com arrays de bytes.
+
+A API também define uma série de decoradores, com funções avançadas. Por exemplo, a classe 
+[BufferedInputStream](https://docs.oracle.com/javase/8/docs/api/java/io/BufferedInputStream.html) associa 
+um buffer ao stream que ela decora, enquanto a classe 
+[DataInputStream](https://docs.oracle.com/javase/8/docs/api/java/io/DataInputStream.html) permite fazer inserções com 
+tipos de dados primitivos (float, double, int, etc). Há até a classe 
+[CypherInputStream](https://docs.oracle.com/javase/8/docs/api/javax/crypto/CipherInputStream.html), que permite 
+adicionar criptografia aos dados.
+
+Todos esses streams podem ser adicionados a qualquer implementação "real" de InputStream, como a 
+[FileInputStream](https://docs.oracle.com/javase/8/docs/api/java/io/FileInputStream.html) (para arquivos) ou a um 
+InputStream de um [Socket](https://docs.oracle.com/javase/8/docs/api/java/net/Socket.html), para comunicação na internet.
+
+Veja um exemplo:
+```java
+//Criamos um fileInputStream para ler de um arquivo. 
+FileInputStream fis = new FileInputStream(new File("dados.dat"));
+//Sem buffer, seria ineficiente, por isso o decoramos com um BufferedInputStream:
+BufferedInputStream bis = new BufferedInputStream(fis);
+//Para ler com mais facilidade, decoramos o buffer com um DataInputStream:
+DataInputStream dis = new DataInputStream(bis);
+
+//Agora fazermos a leitura:
+float valor = dis.readFloat(); 
+```
+
+Observe que essa estratégia permite associar facilmente outros decoradores, em praticamente qualquer ordem.
+
 ## Proxy dinamico
 
 Muitas vezes precisamos adicionar a mesma funcionalidade em todos os métodos do decorator. Por exemplo, suponhamos que 
