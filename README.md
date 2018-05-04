@@ -62,10 +62,12 @@ float valor = dis.readFloat();
 
 Observe que essa estratégia permite associar facilmente outros decoradores, em praticamente qualquer ordem.
 
-## Proxy dinamico
+## Proxy dinâmico
 
 Muitas vezes precisamos adicionar a mesma funcionalidade em todos os métodos do decorator. Por exemplo, suponhamos que 
-precisemos registrar o tempo que cada método da interface Component executou. Faríamos algo parecido com:
+precisemos registrar o tempo que cada método da interface 
+[Component](https://github.com/ProgAvancada/a15/blob/master/src/br/pucpr/br/pucpr/gui/Component.java) executou. 
+Faríamos algo parecido com:
 
 ```java
 
@@ -78,10 +80,15 @@ public void paint(Graphics g) {
 ```
 
 Um decorator teria que realizar essa implementação em todos os métodos. Os proxies dinamicos facilitam esse processo.
-Ao gerar um proxy dinamico, toda chamada a um método de uma determinada interface chamará um método chamado invoke, 
-que contem:
-1. Uma instancia do objeto que fez a chamada
-1. Um objeto do tipo Method, que descreve qual método foi chamado
-1. Uma lista de Objects, com os parametros desse método.
+Ao utilizar a classe [Proxy](https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Proxy.html) para gerar um proxy
+ dinâmico, toda chamada a um método da interface "proxiada" será delegado ao método invoke da interface 
+[InvocationHandler](https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/InvocationHandler.html), 
+que recebe como parâmetros:
 
-Através do comando Proxy.newProxyInstance, cria-se um proxy desses. Confira a implementação na classe App.
+1. Uma instância do objeto que fez a chamada
+1. Um objeto do tipo [Method](https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Method.html), que 
+descreve qual método foi chamado e permite chamá-lo
+1. Uma lista de Objects, com os parâmetros desse método.
+
+Através do comando Proxy.newProxyInstance, cria-se um proxy desses. Confira a implementação no método log da classe 
+[App](https://github.com/ProgAvancada/a15/blob/master/src/br/pucpr/App.java).
