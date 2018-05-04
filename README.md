@@ -8,9 +8,11 @@ Em aula, resolvemos o exercício através do padrão de projeto Decorator.
 
 ## Decorator
 
-Implementamos o objeto DebugDecorator, que implementa a Interface component. Ao invés de conter uma implementação 
-completa de um componente, esse objeto encapsula um componente qualquer em seu interior, repassa todas as funções para 
-ele, mas realiza a pintura com a camada colorida sobreposta.
+Implementamos o objeto 
+[DebugDecorator](https://github.com/ProgAvancada/a15/blob/master/src/br/pucpr/br/pucpr/gui/DebugDecorator.java), que 
+implementa a Interface component. Ao invés de conter uma implementação completa de um componente, esse objeto encapsula 
+um componente qualquer em seu interior, repassa todas as funções para ele, mas realiza a pintura com a camada colorida 
+sobreposta.
 
 Assim, o decorator é usado da seguinte forma:
 
@@ -18,11 +20,12 @@ Assim, o decorator é usado da seguinte forma:
 //Componente que vamos decorar
 Button btn = new Button(10,10,100,50);
 //Camada vermelha
-DebugDecorator layer = new DebugDecorator(btn, new Color(255,0,0,127));
+DebugDecorator layer = new DebugDecorator(btn, Color.RED);
 painel.add(layer);
 ```
 
 Observe que quando o painel chamar o método paint a invocação será:
+
 painel.paint -> layer.paint -> btn.paint
 
 ### Decorator no Java
