@@ -30,7 +30,7 @@ painel.paint -> layer.paint -> btn.paint
 
 ### Decorator no Java
 
-No Java, há um uso bastante interessante do padrão Decorator, através dos InputStreams. Isso permite manter a criação 
+No Java, há um uso bastante interessante do padrão Decorator, através dos streams. Isso permite manter a criação 
 de novos streams simples, enquanto a API fornece recursos avançados como buffers, acesso a dados primitivos, 
 criptografia ou compressão.
 
